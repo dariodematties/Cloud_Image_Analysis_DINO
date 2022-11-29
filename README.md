@@ -50,3 +50,28 @@ output_path='/path/to/output/features'
 cd $cloud_dino_path
 singularity exec --nv -B $sky_images_path:/Sky_Images,$model_path:/Model,$output_path:/Output $singularity_image_path python -m torch.distributed.launch --nproc_per_node=8 $inference_cloud_dino_path --data_path /Sky_Images --pretrained_weights /Model/checkpoint0000.pth --dump_features /Output
 ```
+This command returns a file called `feat.pth` in `Output` path. In this file the code saves all the feature vectors for each input image computed during inference.
+
+## Associative Inferencing using a Cloud-DINO trained model on 8 GPUs
+
+To run it during 10 min do
+
+`qsub -n 1 -q full-node -t 10 -A your_project ./associative_inference_Cloud_DINO.sh`
+
+This is the `inference_Cloud_DINO.sh` script for making inference on Cloud-DINO in a node with 8 GPUs
+
+```
+#!/bin/sh
+
+# Common paths
+sky_images_path='/sky/images/path'
+singularity_image_path='/path/to/the/singularity/container/your_singularity_image_file.sif'
+cloud_dino_path='/path/to/cloud_dino'
+inference_cloud_dino_path='/path/to/cloud_dino/cloud_dino_associative_inference.py'
+model_path='/path/to/the/model'
+output_path='/path/to/output/features'
+
+cd $cloud_dino_path
+singularity exec --nv -B $sky_images_path:/Sky_Images,$model_path:/Model,$output_path:/Output $singularity_image_path python -m torch.distributed.launch --nproc_per_node=8 $inference_cloud_dino_path --data_path /Sky_Images --pretrained_weights /Model/checkpoint0000.pth --dump_features /Output
+```
+This command returns 2 files called `feat.pth` and `file_name.pth` in `Output` path which contain the output feature vectors and file names from each input respectively.
