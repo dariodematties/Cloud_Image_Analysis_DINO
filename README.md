@@ -8,6 +8,15 @@ This project is based in the [original DINO](https://github.com/facebookresearch
 
 `python3 -m torch.distributed.launch --nproc_per_node=1 cloud_dino_training.py --data_path /path/to/your/sky_images/ --output_dir /path/to/your/model/ --use_fp16 false`
 
+## Running associative inference to obtain Cloud-DINO's features and their respective file input names
+
+Associative inference means that you run inference but also bring the name of each input image file in which you do such an inference, so that you are associating the output vectors from the inference with the name of the files from the input.
+
+Here we are truncating the inference ptocess to only 100 samples. That means that after the first 100 samples the inference process will be stoped.
+
+`python3 -m torch.distributed.launch --nproc_per_node=1 cloud_dino_associative_inference.py --data_path /path/to/your/sky_images/ --pretrained_weights /path/to/your/model/checkpoint0000.pth --dump_features /path/to/your/features/ --inference_up_to 100`
+
+
 
 ## Training Cloud-DINO on a node on 8 GPUs
 
