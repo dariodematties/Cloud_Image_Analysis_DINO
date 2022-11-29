@@ -4,6 +4,11 @@ PyTorch implementation for Cloud Image Analysis using DINO (Cloud-DINO).
 
 This project is based in the [original DINO](https://github.com/facebookresearch/dino) repository by [Facebook AI research group](https://ai.facebook.com/).
 
+## For training Cloud-DINO
+
+`python3 -m torch.distributed.launch --nproc_per_node=1 cloud_dino_training.py --data_path /path/to/your/sky_images/ --output_dir /path/to/your/model/ --use_fp16 false`
+
+
 ## Training Cloud-DINO on a node on 8 GPUs
 
 We run it on an [ALCF](https://alcf.anl.gov/) cluster called [ThetaGPU](https://www.alcf.anl.gov/alcf-resources/theta).
