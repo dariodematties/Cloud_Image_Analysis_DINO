@@ -6,6 +6,8 @@ This project is based in the [original DINO](https://github.com/facebookresearch
 
 All the dataset to run the experiments in the paper can be found here [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7032194.svg)](https://doi.org/10.5281/zenodo.7032194)
 
+Cite the code: [![DOI](https://zenodo.org/badge/572093022.svg)](https://zenodo.org/badge/latestdoi/572093022)
+
 
 ## For training Cloud-DINO
 
