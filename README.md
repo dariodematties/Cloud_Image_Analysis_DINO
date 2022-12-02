@@ -89,3 +89,10 @@ cd $cloud_dino_path
 singularity exec --nv -B $sky_images_path:/Sky_Images,$model_path:/Model,$output_path:/Output $singularity_image_path python -m torch.distributed.launch --nproc_per_node=8 $inference_cloud_dino_path --data_path /Sky_Images --pretrained_weights /Model/checkpoint0000.pth --dump_features /Output
 ```
 This command returns 2 files called `feat.pth` and `file_name.pth` in `Output` path which contain the output feature vectors and file names from each input respectively.
+
+## Post-processing capabilities
+
+For post-processing we use Jupyter Notebooks.
+
+We generate the clusterization using a jupyter notebook called ***Generate clusters from features*** and then visualize such clusters and the output feature space using another notebook called ***Visualize Clusterization***.
+
